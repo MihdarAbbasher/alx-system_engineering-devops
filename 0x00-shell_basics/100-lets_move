@@ -1,2 +1,2 @@
 #!/bin/bash
-find ./
+find ./*[A-Z]* -exec mv -t ./tmp/u/ {} + 
