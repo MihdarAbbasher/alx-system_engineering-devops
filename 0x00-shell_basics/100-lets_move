@@ -1,2 +1,2 @@
 #!/bin/bash
-find ./[A-Z]* -exec mv -t ./d2/ {} +
+find ./[A-Z]* -exec mv -t ./tmp/u/ {} +
