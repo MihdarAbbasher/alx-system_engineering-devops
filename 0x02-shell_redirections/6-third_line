@@ -1,2 +1,2 @@
 #!/bin/bash
-head -2 iiacta | tail -1
+head -n 3 iiacta | tail -n 1
