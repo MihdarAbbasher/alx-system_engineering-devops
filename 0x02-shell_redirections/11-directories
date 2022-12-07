@@ -1,2 +1,2 @@
 #!/bin/bash
-find -typed d|grep -v "^.$"|wc -l
+find -typed d|grep -v "^.$"|grep -v "^..$"|wc -l 
