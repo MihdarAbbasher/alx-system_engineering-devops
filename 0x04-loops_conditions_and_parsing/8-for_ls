@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# list content of current dir in list name after dash.
+
+ls > list
+
+do
+for (i in list)
+echo "$i"
+done
