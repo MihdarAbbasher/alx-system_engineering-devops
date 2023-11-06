@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Edit the 'hosts' file domain's IPs
+
+nc -l localhost 98
