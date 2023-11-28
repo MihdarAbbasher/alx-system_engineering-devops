@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#  displays process's own PID
+
+for pr in $(pgrep bash); do
+	echo "$pr bash";
+done
