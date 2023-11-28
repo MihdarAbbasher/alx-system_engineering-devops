@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#  displays process's own PID
+
+while true; do
+	echo "To infinity and beyond";
+done
