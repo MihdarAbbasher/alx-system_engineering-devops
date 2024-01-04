@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Configures an Nginx server => redirect_me redirects to another page.
+# The redirection will be configured as "301 Moved Permanently"
+
+sudo apt-get update
+sudo apt-get install -y nginx
+sudo mkdir -p /etc/nginx/html
+sudo touch /etc/nginx/html/index.html
+sudo chmod 666 /etc/nginx/html/index.html
+echo "Hello World!" > /etc/nginx/html/index.html
+sudo chmod 666 /etc/nginx/sites-available/default
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /etc/nginx/html;
+    index  index.html index.htm;
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
+}" > /etc/nginx/sites-available/default
+
+sudo service nginx restart
