@@ -11,8 +11,7 @@ echo "Hello World!" > /etc/nginx/html/index.html
 sudo touch /etc/nginx/html/404.html
 sudo chmod 666 /etc/nginx/html/404.html
 echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
-
-chmod 666 /etc/nginx/sites-available/default
+sudo chmod 666 /etc/nginx/sites-available/default
 printf %s "server {
     listen 80;
     listen [::]:80 default_server;
