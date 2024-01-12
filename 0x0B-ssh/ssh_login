@@ -1,0 +1,3 @@
+# ssh clinet config file
+
+ssh -v ubuntu@54.161.241.146 -i school
