@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # generates a MySQL dump and creates a compressed archive out of it.
 
-sudo mysqldump -u root --all-databases > backup.sql
+mysqldump --all-databases -u root --password="$1" > backup.sql
+tar -cvzf "$(date '+%d-%m-%Y.tar.gz')" backup.sql
