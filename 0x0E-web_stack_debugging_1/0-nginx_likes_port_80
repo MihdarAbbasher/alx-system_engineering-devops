@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Fix nginx config
 
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
