@@ -77,3 +77,30 @@ Y/zdDMGjskfEYbNXCAY2FRZSE58tgTvPKD++Kd2KGplMU2EIFT7JYfKhHAB5DGMkx92HUMid
 sTSKHe+QnnnoFmu4gnmDU31i
 =Xqbo
 -----END PGP PUBLIC KEY BLOCK-----
+
+
+
+
+# replication:
+
+CHANGE REPLICATION SOURCE TO
+
+SOURCE_HOST='34.202.233.132',
+SOURCE_USER='replica_user',
+SOURCE_PASSWORD='password',
+SOURCE_LOG_FILE='mysql-bin.000092',
+SOURCE_LOG_POS=306;
+START REPLICA;
+
+#above commands not working
+=====================================
+# but these work
+
+CHANGE MASTER TO
+MASTER_HOST='34.202.233.132',
+MASTER_USER='replica_user',
+MASTER_PASSWORD='password',
+MASTER_LOG_FILE='mysql-bin.000092',
+MASTER_LOG_POS=306;
+START SLAVE;
+STOP SLAVE;
