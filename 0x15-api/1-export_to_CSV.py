@@ -9,7 +9,7 @@ if __name__ == '__main__':
     employeeId = sys.argv[1]
     url = "https://jsonplaceholder.typicode.com/users/" + employeeId
     response = requests.get(url)
-    employeeName = response.json().get('name')
+    userName = response.json().get('username')
     url += "/todos"
     response = requests.get(url)
     allTasks = response.json()
@@ -17,6 +17,6 @@ if __name__ == '__main__':
     doneTasks = []
     with open('{}.csv'.format(employeeId), 'w') as myfile:
         for task in allTasks:
-            line = '"{},"{}","{}","{}"\n'.format(employeeId, employeeName,
-                task.get('completed'), task.get('title'))
+            line = '"{},"{}","{}","{}"\n'.format(employeeId, userName,
+                    task.get('completed'), task.get('title'))
             myfile.write(line)
