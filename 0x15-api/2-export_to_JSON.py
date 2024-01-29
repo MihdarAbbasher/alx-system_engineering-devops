@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Accessing a REST API for employees todo lists"""
 
+import json
 import requests
 import sys
 
