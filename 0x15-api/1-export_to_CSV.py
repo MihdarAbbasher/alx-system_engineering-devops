@@ -17,6 +17,6 @@ if __name__ == '__main__':
     doneTasks = []
     with open('{}.csv'.format(employeeId), 'w') as myfile:
         for task in allTasks:
-            line = '"{},"{}","{}","{}"\n'.format(employeeId, userName,
-                    task.get('completed'), task.get('title'))
+            line = '"{}","{}","'.format(employeeId, userName)
+            line += '"{}","{}"\n'.format(task.get('completed'), task.get('title'))
             myfile.write(line)
