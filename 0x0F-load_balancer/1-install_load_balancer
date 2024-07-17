@@ -5,6 +5,15 @@
 
 sudo apt-get -y update
 sudo apt-get -y install haproxy
+
+sudo echo '400' > /etc/haproxy/errors/400.http
+sudo echo '403' > /etc/haproxy/errors/403.http
+sudo echo '408' > /etc/haproxy/errors/408.http
+sudo echo '502' > /etc/haproxy/errors/502.http
+sudo echo '503' > /etc/haproxy/errors/503.http
+sudo echo '504' > /etc/haproxy/errors/504.http
+
+
 server_config=\
 "
 global
