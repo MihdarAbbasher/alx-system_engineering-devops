@@ -48,8 +48,8 @@ frontend  mihdar-frontend
         default_backend mihdar-backend
 backend mihdar-backend
         balance roundrobin
-        server 190626-web-01 54.161.241.146:80 check
-        server 190626-web-02 18.210.14.165:80 check
+        server 190626-web-01 100.25.30.175:80 check
+        server 190626-web-02 100.26.229.181:80 check
 "
 echo "$server_config" | sudo tee  /etc/haproxy/haproxy.cfg
 haproxy_config=\
