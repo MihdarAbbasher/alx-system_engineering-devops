@@ -24,5 +24,6 @@ server {
 chmod 644 /etc/nginx/nginx.conf
 # apache may interfere with nginx => kill its process
 pkill apache2
+
 # start the nginx as 'nginx' user
 sudo -u nginx service nginx start
