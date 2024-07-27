@@ -1,0 +1,35 @@
+CREATE USER 'user_name'@hostname IDENTIFIED BY 'passwd';
+CREATE USER 'holberton_user'@localhost IDENTIFIED BY 'projectcorrection280hbtn';
+
+CREATE USER 'replica_user'@% IDENTIFIED BY 'passwd';
+
+GRANT REPLICATION CLIENT ON *.* TO holberton_user@localhost;
+GRANT SELECT ON *.* TO holberton_user@localhost;
+
+REVOKE SELECT ON *.* FROM holberton_user@localhost;
+
+SHOW GRANTS FOR holberton_user@localhost;
+
+CREATE DATABASE tyrell_corp;
+
+CREATE TABLE nexus6 (
+	id int,
+	name varchar(255)
+);
+
+insert into nexus6 (id, name) values (2, 'mhd');
+
+
+GRANT REPLICATION SLAVE ON *.* TO 'replica_user'@localhost;
+
+
+file name: mysql-bin.000001
+position: 154
+
+sudo mysqldump -u root tyrell_corp > tyrell_corp.sql
+
+sudo ufw allow from replica_server_ip to any port 3306
+sudo ufw allow from 100.26.229.181 to any port 3306
+
+mysqldump -u holberton_user --password=projectcorrection280hbtn tyrell_corp < /tmp/tyrell.sql
+

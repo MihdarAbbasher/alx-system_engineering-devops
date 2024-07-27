@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Installs Nginx with specific configurations
+
+sudo apt-get update
+sudo apt-get install -y nginx
+sudo mkdir /etc/nginx/html
+sudo touch /etc/nginx/html/index.html
+sudo chmod 666 /etc/nginx/html/index.html
+sudo echo "Holberton School" > /etc/nginx/html/index.html
+sudo chmod 666 /etc/nginx/sites-available/default
+sudo printf %s "server {
+     listen      80 default_server;
+     listen      [::]:80 default_server;
+     root        /etc/nginx/html;
+     index       index.html index.htm;
+}
+" > /etc/nginx/sites-available/default
+
+sudo service nginx restart
