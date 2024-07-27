@@ -106,3 +106,9 @@ MASTER_LOG_FILE='mysql-bin.000092',
 MASTER_LOG_POS=306;
 START SLAVE;
 STOP SLAVE;
+
+
+
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
+
