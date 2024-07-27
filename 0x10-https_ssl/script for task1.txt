@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# Check if running as root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
+# Function to install HAProxy and certbot
+install_dependencies() {
+    echo "Updating package repository..."
+    apt update
+
+    echo "Installing HAProxy..."
+    apt install -y haproxy
+
+    echo "Installing Certbot..."
+    apt install -y certbot
+}
+
+# Function to obtain SSL certificate using certbot
+get_certificate() {
+    echo "Obtaining SSL certificate for domain: $1"
+    certbot certonly --standalone -d $1 --non-interactive --agree-tos -m mihdar.ph@gmail.com
+}
+
+# Function to configure HAProxy with the obtained certificate
+configure_haproxy() {
+    echo "Configuring HAProxy..."
+
+    # Backup original HAProxy configuration
+    cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
+
+    # Configure HAProxy to use SSL certificate
+    cat <<EOF > /etc/haproxy/haproxy.cfg
+global
+    maxconn 4096
+
+defaults
+    mode http
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+
+frontend http-in
+    bind *:80
+    redirect scheme https code 301 if !{ ssl_fc }
+
+frontend https-in
+    bind *:443 ssl crt /etc/letsencrypt/live/$1/fullchain.pem
+
+    default_backend servers
+
+backend servers
+    server server1 127.0.0.1:8080
+EOF
+
+    # Reload HAProxy to apply changes
+    systemctl reload haproxy
+}
+
+# Main script execution starts here
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <domain>"
+    exit 1
+fi
+
+DOMAIN=$1
+
+# Install HAProxy and Certbot
+install_dependencies
+
+# Obtain SSL certificate
+get_certificate $DOMAIN
+
+# Configure HAProxy
+configure_haproxy $DOMAIN
+
+echo "HAProxy and Certbot setup completed successfully for domain: $DOMAIN"
+

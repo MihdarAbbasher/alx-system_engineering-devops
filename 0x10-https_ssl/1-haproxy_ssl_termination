@@ -1,3 +1,4 @@
+
 global
         log /dev/log    local0
         log /dev/log    local1 notice
@@ -25,7 +26,8 @@ defaults
         timeout connect 5000
         timeout client  50000
         timeout server  50000
-        errorfile 400 /etc/haproxy/errors/400.http
+        # don't forget to create these files
+	errorfile 400 /etc/haproxy/errors/400.http
         errorfile 403 /etc/haproxy/errors/403.http
         errorfile 408 /etc/haproxy/errors/408.http
         errorfile 500 /etc/haproxy/errors/500.http
@@ -37,7 +39,12 @@ frontend  mihdar-frontend
         bind :80
         mode http
         default_backend mihdar-backend
+frontend mihdar-https
+	bind *:443 ssl crt /etc/haproxy/cert/www.mihdarabbasher.tech.pem
+	http-request set-header X-Forwarded-Proto https
+	default_backend mihdar-backend
 backend mihdar-backend
         balance roundrobin
-        server 190626-web-01 100.26.154.214:80 check
+        server 190626-web-01 100.25.30.175:80 check
         server 190626-web-02 100.26.229.181:80 check
+

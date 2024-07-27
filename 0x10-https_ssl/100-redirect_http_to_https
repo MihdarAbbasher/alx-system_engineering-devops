@@ -37,6 +37,7 @@ frontend  mihdar-frontend-http
         bind *:80
         mode http
 	http-request set-header X-Forwarded-Proto http
+	# http-request redirect scheme https code 301 unless { ssl_fc }
         default_backend mihdar-backend
 
 frontend mihdar-frontend-https
